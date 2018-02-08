@@ -3,6 +3,8 @@ import random
 import math
 from lab import *
 from qLearn import *
+from aStar import *
+
 
 class Ia:
 
@@ -16,8 +18,6 @@ class Ia:
        self.labyrinthe = Labyrinthe()
 
     def resolveIA(self,lab,sommetInit):
-
-          print "coucou"
           """mon_q=QLearning(mon_lab)
           mon_q.set_r(mon_lab)
           mon_q.testQ()
@@ -25,7 +25,9 @@ class Ia:
           print(mon_q.getQ())
           mon_q.traceChemin(sommetInit)"""
 
-          #as=aStar()
+          mon_a=AStar(mon_lab)
+          mon_a.setListNodes(mon_lab,sommetInit)
+          mon_a.a_star_search(mon_lab,sommetInit)
 
 
 
@@ -35,7 +37,6 @@ if __name__ == "__main__":
 
     mon_ia=Ia()
     mon_lab=mon_ia.labyrinthe
-    mon_lab.setNoeud()
     mon_lab.setCoutMatrice()
     CM=mon_lab.getCoutMatrice()
     print(CM)

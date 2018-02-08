@@ -2,68 +2,67 @@ import numpy as np
 import random
 import math
 
-class Noeud:# pour moi
+
+
+class Node:
 
     def __init__(self):
-           self.x = int
-           self.Children = []
-           self.BestChild = int
-           self.costFromStart = int #g
-           self.heuristic = int #h
-           self.estimateCost = int #f 
+            self.x = int
+            self.heuristic = int
+            self.children = []
+            self.estimate = int
+            self.costSoFar = int
 
     def getX(self):
             return self.x
 
-    def getChildren(self):
-            return self.heur
+    def setX(self,name):
+            self.x = name
+           
+    def getHeuristic(self):
+            return self.heuristic
         
-    def getEstimateCost(self):
-            return self.getHeuristic() + self.getCostFromStart()
-
-    def getBestChild(self):
-            return self.BestChild
-
+    def setHeuristic(self,h):
+            self.heuristic = h
+       
+    def getChildren(self):
+            return self.children
+        
     def setChildren(self,x):
-            return self.Children.append(x)
+            self.children.append(x)
 
-    def getBestChild(self,newX):
-           self.x = newX
+    def getEstimate(self):
+            return self.estimate
 
-    def checkFrontier(self,newHeur):
-           self.heur = newHeur
+    def setEstimate(self):
+            self.estimate = self.heuristic + self.costSoFar
 
+    def getCostSoFar(self):
+            return self.costSoFar
+
+    def setCostSoFar(self,x):
+            self.costSoFar=x
+             
+        
 
 
 class Labyrinthe:
 
     def __init__(self):
-            self.listeNoeud = [Noeud]
             self.coutMatrice = [[]]
-
-    def getNoeud(self,i):
-            return self.listeNoeud[i]
-
-    def getNoeuds(self):
-            return self.listeNoeud
-
-    def setNoeud(self):
-            nb=random.randint(5,10)
-            listeN=[]
-            for i in range (0,nb):
-                listeN.append(Noeud())
-            self.listeNoeud = listeN
 
     def getCoutMatrice(self):
             return self.coutMatrice
 
     def setCoutMatrice(self):
-            n=len(self.listeNoeud)
+            n=random.randint(5,10)
             self.coutMatrice = makeMat(n)
 
-#Fonction de creation de la matrice Labyrinthe
+
+#Fonction de création de la matrice Labyrinthe
 def makeMat(n):
 
+#initialisaton M
     M=np.zeros([n,n])
     i=random.randint(0,n-1)
     j=random.randint(0,n-1)
@@ -72,7 +71,7 @@ def makeMat(n):
     M[i][j]=1
     M[j][i]=1
     v=M[:][n-1]
-#Tant que la derniere colonne est vide, soit la sortie n est pas reliee,
+#Tant que la derniere colonne est vide, soit la sortie n est pas reliée,
 #on creer un chemin en iterant jusqu a celle ci.
     while (np.all(v==0)):
         ibis=random.randint(0,n-1)
@@ -84,7 +83,7 @@ def makeMat(n):
         j=ibis
         i=jbis
 
-#On rajoute des liaisons aleatoires pour creer d'autres chemins.
+#On rajoute des liaisons aleatoires pour créer d'autres chemins.
     nbModif=round(3*(n-1)/4)
     for it in range (0,nbModif):
         while ((M[i][j]==1) or (i==j)):
