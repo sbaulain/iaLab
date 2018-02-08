@@ -2,37 +2,37 @@ import numpy as np
 import random
 import math
 
-
-
-class Noeud:
+class Noeud:# pour moi
 
     def __init__(self):
            self.x = int
-           self.coutSuc = [int]
-           self.heur = int
+           self.Children = []
+           self.BestChild = int
+           self.costFromStart = int #g
+           self.heuristic = int #h
+           self.estimateCost = int #f 
 
-    def getXY(self):
+    def getX(self):
             return self.x
 
-    def getHeur(self):
+    def getChildren(self):
             return self.heur
+        
+    def getEstimateCost(self):
+            return self.getHeuristic() + self.getCostFromStart()
 
-#?    def getRecompense(self,i):
-#            return
+    def getBestChild(self):
+            return self.BestChild
 
-#?    def getSucc(self,x):
-#?            return
+    def setChildren(self,x):
+            return self.Children.append(x)
 
-    def getCoutSucc(self):
-            return self.coutSuc[:]
+    def getBestChild(self,newX):
+           self.x = newX
 
-    def setXY(self,newX):
-       self.x = newX
+    def checkFrontier(self,newHeur):
+           self.heur = newHeur
 
-    def setHeuristique(self,newHeur):
-       self.heur = newHeur
-
-#?    def explorer(self,i):
 
 
 class Labyrinthe:
@@ -61,11 +61,9 @@ class Labyrinthe:
             n=len(self.listeNoeud)
             self.coutMatrice = makeMat(n)
 
-
-#Fonction de création de la matrice Labyrinthe
+#Fonction de creation de la matrice Labyrinthe
 def makeMat(n):
 
-#initialisaton M
     M=np.zeros([n,n])
     i=random.randint(0,n-1)
     j=random.randint(0,n-1)
@@ -74,7 +72,7 @@ def makeMat(n):
     M[i][j]=1
     M[j][i]=1
     v=M[:][n-1]
-#Tant que la derniere colonne est vide, soit la sortie n est pas reliée,
+#Tant que la derniere colonne est vide, soit la sortie n est pas reliee,
 #on creer un chemin en iterant jusqu a celle ci.
     while (np.all(v==0)):
         ibis=random.randint(0,n-1)
@@ -86,7 +84,7 @@ def makeMat(n):
         j=ibis
         i=jbis
 
-#On rajoute des liaisons aleatoires pour créer d'autres chemins.
+#On rajoute des liaisons aleatoires pour creer d'autres chemins.
     nbModif=round(3*(n-1)/4)
     for it in range (0,nbModif):
         while ((M[i][j]==1) or (i==j)):
