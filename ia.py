@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import math
+import matplotlib.pyplot as plt
 from lab import *
 from qLearn import *
 from aStar import *
@@ -17,17 +18,15 @@ class Ia:
     def setLabyrinthe(self):
        self.labyrinthe = Labyrinthe()
 
-    def resolveIA(self,lab,sommetInit):
-          mon_q=QLearning(mon_lab)
-          mon_q.set_r(mon_lab)
-          mon_q.testQ()
-          print('nous obtenons la matrice solution :')
-          print(mon_q.getQ())
-          mon_q.traceChemin(sommetInit)
 
-          """mon_a=AStar(mon_lab)
-          mon_a.setListNodes(mon_lab,sommetInit)
-          mon_a.a_star_search(mon_lab,sommetInit)"""
+
+    def resolveIA(self,lab,sommetInit):
+        mon_q=QLearning(mon_lab)
+        mon_q.testQGammas(mon_lab,sommetInit)
+
+          #"""mon_a=AStar(mon_lab)
+          #mon_a.setListNodes(mon_lab,sommetInit)
+          #mon_a.a_star_search(mon_lab,sommetInit)"""
 
 
 

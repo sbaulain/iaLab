@@ -2,6 +2,7 @@ import numpy as np
 import random
 import math
 import operator
+import matplotlib.pyplot as plt
 from lab import *
 
 
@@ -39,7 +40,7 @@ class QLearning:
             n=len(mon_lab.getCoutMatrice())
             self.q = np.zeros([n,n])
             self.r = np.zeros([n,n])
-            self.recompense = []
+            self.conv = []
             self.gamma = []
 
     def set_r(self,mon_lab):
@@ -63,7 +64,7 @@ class QLearning:
     def testQ(self):
         n=len(self.q)-1
         it=0
-        while (keepGoing(self.q,self.r)==True)and (it<504):
+        while (keepGoing(self.q,self.r)==True) and (it<504):
             som=random.randint(0,n)
             while True:
                 [self.q,newSom]=first(som,self.q,self.r,0.5)
@@ -71,10 +72,11 @@ class QLearning:
                 if (som!=n):
                     break
             it=it+1
+        self.conv.append(it)
 
 
-
-
+    def setQinit(self):
+            self.q=np.zeros([len(self.q),len(self.q)])
 
     def setgamma(self,newGamma):
             self.gamma=newGamma
@@ -83,6 +85,7 @@ class QLearning:
             n=len(self.q)
             sommet=self.q[i][:]
             chemin=[i]
+            jmax=0
             while (i!=n-1) :
                 coutMax=0
                 for j in range (0,n):
@@ -95,6 +98,25 @@ class QLearning:
                 chemin.append(i)
             print('le chemin a suivre est : ',chemin)
 
+
+    def testQGammas(self,mon_lab,sommetInit):
+        self.set_r(mon_lab)
+        x=[]
+        for i in range (1,9):
+              self.setQinit()
+              self.setgamma(i*0.1)
+              self.testQ()
+              x.append(i*0.1)
+        print('Pour le QLearning nous obtenons la matrice solution :')
+        print(self.getQ())
+        self.traceChemin(sommetInit)
+        fig = plt.figure()
+        plt.plot(x,self.conv)
+        fig.suptitle('Nombres d iterations jusqu a convergence en fonction des valeurs de gamma', fontsize=20)
+        plt.xlabel('gamma', fontsize=18)
+        plt.ylabel('Nb itérations', fontsize=16)
+        fig.savefig('convergence.jpg')
+        #plt.show()
 
 
 
