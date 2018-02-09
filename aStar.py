@@ -27,7 +27,7 @@ class AStar:
         
     def setListNodes(self,mon_lab,sommetInit):
         mat=mon_lab.getCoutMatrice()
-        changeMatrice(mat,sommetInit)#On multiplie par 1à les cout de retour en arrière
+        #changeMatrice(mat,sommetInit)#On multiplie par 1à les cout de retour en arrière
         n=len(mat)#nb of nodes      
         for j in range (0,n):
             temp=Node()
@@ -47,10 +47,10 @@ class AStar:
 
     def a_star_search(self,mon_lab,sommetInit):
         mat=mon_lab.getCoutMatrice()
-        changeMatrice(mat,sommetInit)
+        #changeMatrice(mat,sommetInit)
         n=len(mat)
         
-        print(mat)
+        #print(mat)
         start=self.list_nodes[sommetInit]
         goal=self.list_nodes[n-1]
         
@@ -71,7 +71,7 @@ class AStar:
                 print (start.getX(),frontier[i].getX(),frontier[i].getEstimate())
                
             candidate=self.getBestChild(start)
-            #print(candidate.getX(),"can")
+            print(candidate.getX(),"can")
             
             if checkFrontier(start,frontier) != False :
                  candidate = checkFrontier(start,frontier)

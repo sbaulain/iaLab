@@ -18,16 +18,16 @@ class Ia:
        self.labyrinthe = Labyrinthe()
 
     def resolveIA(self,lab,sommetInit):
-          """mon_q=QLearning(mon_lab)
+          mon_q=QLearning(mon_lab)
           mon_q.set_r(mon_lab)
           mon_q.testQ()
           print('nous obtenons la matrice solution :')
           print(mon_q.getQ())
-          mon_q.traceChemin(sommetInit)"""
+          mon_q.traceChemin(sommetInit)
 
-          mon_a=AStar(mon_lab)
+          """mon_a=AStar(mon_lab)
           mon_a.setListNodes(mon_lab,sommetInit)
-          mon_a.a_star_search(mon_lab,sommetInit)
+          mon_a.a_star_search(mon_lab,sommetInit)"""
 
 
 
