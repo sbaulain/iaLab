@@ -5,19 +5,49 @@ import operator
 from lab import *
 
 
+def print_list(listi):
+    temp=[]
+    for j in range (0,len(listi)):
+        temp.append(listi[j].getX())
+    print (temp)
+            
+def estimate(listi):
+    for j in range (0,len(listi)):
+        listi[j].setEstimate()
 
-
-def checkFrontier(start,frontier):  
+def checkFrontier(start,frontier):
     for j in frontier:
         if start.getEstimate() > j.getEstimate():
-            return j
-        else :
-            return False
+            start=j
 
-def changeMatrice(mat,sommetInit):
+def changeMatrice(mat):
     n=len(mat)
-    for j in range(0,n):
-        mat[j,sommetInit]=mat[j,0]*10
+    index=[]
+    for i in range(0,n):
+        for j in range (0,n):
+            if i>j:
+                mat[i,j]=0
+
+    for l in range(0,n):
+        temp=False
+        for k in range (0,n):
+            if mat[l,k]==1:
+                temp = True
+        if temp==False: #toute les lignes a zero
+            index.append(l)
+
+    d=0
+    for p in index :
+        if index[d]==n-1:
+            mat[index[d],n-1]=1
+        else :
+            rand=random.randint(p+1, n-1)
+            mat[index[d],rand]=1      
+        d=d+1
+         
+         
+         
+        
 
         
 class AStar:
@@ -27,7 +57,8 @@ class AStar:
         
     def setListNodes(self,mon_lab,sommetInit):
         mat=mon_lab.getCoutMatrice()
-        #changeMatrice(mat,sommetInit)#On multiplie par 1à les cout de retour en arrière
+        changeMatrice(mat)#On multiplie par 1à les cout de retour en arrière
+        
         n=len(mat)#nb of nodes      
         for j in range (0,n):
             temp=Node()
@@ -46,11 +77,13 @@ class AStar:
         self.list_nodes[n-1].setHeuristic(0)
 
     def a_star_search(self,mon_lab,sommetInit):
+        closedlist=[]
+        
         mat=mon_lab.getCoutMatrice()
-        #changeMatrice(mat,sommetInit)
+        changeMatrice(mat)
         n=len(mat)
         
-        #print(mat)
+        print(mat)
         start=self.list_nodes[sommetInit]
         goal=self.list_nodes[n-1]
         
@@ -58,38 +91,49 @@ class AStar:
         x=0
         y=0
         start.setCostSoFar(0)
-        j=0
-        
+        it=0
 
-        while (goal.getX()!=start.getX() and j<2):
+        closedlist.append(start)
+
+        while (goal.getX()!=start.getX() and it<10):
             #cost=start.getCostSoFar()
             start.setEstimate()
             for i in range (0,len(start.getChildren())):           
-                start.getChildren()[i].setCostSoFar(mat[sommetInit,start.getChildren()[i].getX()]+j)
-                frontier.append(start.getChildren()[i])
-                frontier[i].setEstimate()
-                print (start.getX(),frontier[i].getX(),frontier[i].getEstimate())
-               
-            candidate=self.getBestChild(start)
-            print(candidate.getX(),"can")
+                start.getChildren()[i].setCostSoFar(mat[sommetInit,start.getChildren()[i].getX()]+it)
+                if frontier.count(start.getChildren()[i])==0:
+                    frontier.append(start.getChildren()[i])                
+    
+                #print (start.getX(),frontier[i].getX(),frontier[i].getEstimate())
+
+            #print("frontiere:")
+            #print_list(frontier)
+
+            estimate(frontier)
+
+            candidate=self.getBestChild(start,goal)
+            #print(candidate.getX(),"candidate")
             
-            if checkFrontier(start,frontier) != False :
-                 candidate = checkFrontier(start,frontier)
+            checkFrontier(start,frontier)
 
-            #candidate.setCostSoFar(1+start.getCostSoFar())#rajout du chemin parcouru
             start = candidate
-            j=j+1
-            print("------------",j)
-            del(frontier[:])
+            it=it+1
 
+            closedlist.append(candidate)
+            frontier.remove(candidate)
+            #print("------------",it)
 
-    def getBestChild(self,node):
+        print("Le chemin est :")    
+        print_list(closedlist)
+
+    def getBestChild(self,node,goal):
         best = node.getChildren()[0]
-        print("esti",node.getX(),best.getEstimate())
+        #print("esti",0,best.getEstimate())
         for i in range (1,len(node.getChildren())):
-            print("esti",node.getX(),node.getChildren()[i].getEstimate())
+            #print("esti",i,node.getChildren()[i].getEstimate())
             if node.getChildren()[i].getEstimate()<best.getEstimate() and not (len(node.getChildren()[i].getChildren())==0):
-                best = node.getChildren()[i] 
+                best = node.getChildren()[i]
+            if node.getChildren()[i].getX()==goal.getX():
+                best = node.getChildren()[i]
         return best
 
     

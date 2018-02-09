@@ -1,9 +1,9 @@
 import numpy as np
 import random
 import math
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from lab import *
-from qLearn import *
+#from qLearn import *
 from aStar import *
 
 
@@ -21,12 +21,17 @@ class Ia:
 
 
     def resolveIA(self,lab,sommetInit):
+
+        print("Avec apprentissage par renforcement :")
+
         mon_q=QLearning(mon_lab)
         mon_q.testQGammas(mon_lab,sommetInit)
 
-          #"""mon_a=AStar(mon_lab)
-          #mon_a.setListNodes(mon_lab,sommetInit)
-          #mon_a.a_star_search(mon_lab,sommetInit)"""
+        print("Avec l'algorithme A star :")
+        
+        mon_a=AStar(mon_lab)
+        mon_a.setListNodes(mon_lab,sommetInit)
+        mon_a.a_star_search(mon_lab,sommetInit)
 
 
 
