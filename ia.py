@@ -1,9 +1,9 @@
 import numpy as np
 import random
 import math
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from lab import *
-#from qLearn import *
+from qLearn import *
 from aStar import *
 
 
@@ -22,16 +22,20 @@ class Ia:
 
     def resolveIA(self,lab,sommetInit):
 
-        print("Avec apprentissage par renforcement :")
+        #print("Avec apprentissage par renforcement :")
 
-        mon_q=QLearning(mon_lab)
-        mon_q.testQGammas(mon_lab,sommetInit)
+        #mon_q=QLearning(mon_lab)
+        #mon_q.testQGammas(mon_lab,sommetInit)
 
         print("Avec l'algorithme A star :")
+
+        #print("Exemple d'execution du rapport:")
+
         
         mon_a=AStar(mon_lab)
-        mon_a.setListNodes(mon_lab,sommetInit)
-        mon_a.a_star_search(mon_lab,sommetInit)
+        sommetInit=0
+        newM= mon_a.setListNodes(mon_lab,sommetInit)
+        mon_a.a_star_search(mon_lab,sommetInit,newM)
 
 
 
@@ -44,6 +48,11 @@ if __name__ == "__main__":
     mon_lab.setCoutMatrice()
     CM=mon_lab.getCoutMatrice()
     print(CM)
+    
+    """mon_lab.setExemple()
+    exemple=mon_lab.getExemple()
+    print(exemple)"""
+    
     sommetInit=random.randint(0,len(CM)-2)
     print('nous partirons du sommet :', sommetInit)
     mon_ia.resolveIA(mon_lab,sommetInit)

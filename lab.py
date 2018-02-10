@@ -50,6 +50,7 @@ class Labyrinthe:
 
     def __init__(self):
             self.coutMatrice = [[]]
+            self.exemple = [[]]
 
     def getCoutMatrice(self):
             return self.coutMatrice
@@ -57,6 +58,13 @@ class Labyrinthe:
     def setCoutMatrice(self):
             n=random.randint(5,10)
             self.coutMatrice = makeMat(n)
+            self.exemple = makeExemple()
+            
+    def getExemple(self):
+            return self.exemple
+
+    def setExemple(self):
+            self.exemple = makeExemple()
 
 
 #Fonction de création de la matrice Labyrinthe
@@ -102,3 +110,24 @@ def makeMat(n):
             M[col][i]=1
 
     return M
+
+def makeExemple():
+    a=np.array([[0,1,1,0,0,0,0],[0,0,0,1,0,0,0],[0,0,0,1,1,0,0],[0,0,0,0,0,0,1],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1],[0,0,0,0,0,0,1]])
+    return a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
