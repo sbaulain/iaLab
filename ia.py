@@ -30,10 +30,10 @@ class Ia:
         print("Avec l'algorithme A star :")
 
         #print("Exemple d'execution du rapport:")
-
+        #newM= mon_a.setListNodes(mon_lab,0)
+        #mon_a.a_star_search(mon_lab,sommetInit,newM)
         
         mon_a=AStar(mon_lab)
-        sommetInit=0
         newM= mon_a.setListNodes(mon_lab,sommetInit)
         mon_a.a_star_search(mon_lab,sommetInit,newM)
 

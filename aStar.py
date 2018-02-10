@@ -16,9 +16,11 @@ def estimate(listi):
         listi[j].setEstimate()
 
 def checkFrontier(start,frontier):
-    for j in frontier:
-        if start.getEstimate() > j.getEstimate():
-            start=j
+        for j in frontier:
+            if start.getEstimate() > j.getEstimate():
+                start=j
+        return "check frontier"
+
 
 def changeMatrice(mat):
     n=len(mat)
@@ -102,6 +104,9 @@ class AStar:
         while (goal.getX()!=start.getX() and it<10):
             #cost=start.getCostSoFar()
             start.setEstimate()
+
+            
+                
             for i in start.getChildren():           
                 i.setCostSoFar(mat[start.getX(),i.getX()]+it)
                 i.setEstimate()
@@ -115,18 +120,17 @@ class AStar:
             print_list(frontier)
 
             estimate(frontier)
-
-            
+           
             candidate=self.getBestChild(start,goal)
             print(candidate.getX(),"candidate")
             
-            checkFrontier(start,frontier)
+            checkFrontier(candidate,frontier)
 
             start = candidate
             it=it+1
 
-            closedlist.append(candidate)
-            frontier.remove(candidate)
+            closedlist.append(start)
+            frontier.remove(start)
             print("------------",it)
 
         print("Le chemin est :")    
@@ -146,4 +150,5 @@ class AStar:
 
         return best
 
+    
     
