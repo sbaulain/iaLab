@@ -4,6 +4,7 @@ import math
 import operator
 import matplotlib.pyplot as plt
 from lab import *
+import copy
 
 
 
@@ -44,7 +45,7 @@ class QLearning:
             self.gamma = []
 
     def set_r(self,mon_lab):
-        newCM=mon_lab.getCoutMatrice()
+        newCM=copy.deepcopy(mon_lab.getCoutMatrice())
         n=len(newCM)
         for j in range (0,n):
             for i in range (0,n):
@@ -107,16 +108,20 @@ class QLearning:
               self.setgamma(i*0.1)
               nbit=self.testQ()
               x.append(i*0.1)
-        print('Pour le QLearning nous obtenons la matrice solution :')
-        print(self.getQ())
-        self.traceChemin(sommetInit)
-        print(nbit)
+        if (nbit==504):
+            print('Il n y a pas de résolution possible du labyrinthe en partant du sommet', sommetInit)
+            print(self.getQ())
+            print(nbit)
+        else:
+            print('Pour le QLearning nous obtenons la matrice solution :')
+            print(self.getQ())
+            self.traceChemin(sommetInit)
         fig = plt.figure()
         plt.plot(x,self.conv)
         fig.suptitle('Nombres d iterations jusqu a convergence en fonction des valeurs de gamma', fontsize=20)
         plt.xlabel('gamma', fontsize=18)
         plt.ylabel('Nb itérations', fontsize=16)
-        fig.savefig('convergence.jpg')
+        fig.savefig('convergence.png')
         #plt.show()
 
     def getQ(self):

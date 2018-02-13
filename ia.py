@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from lab import *
 from qLearn import *
 from aStar import *
+import copy
 
 
 class Ia:
