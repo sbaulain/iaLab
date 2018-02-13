@@ -82,7 +82,21 @@ class QLearning:
     def setgamma(self,newGamma):
             self.gamma=newGamma
 
-    def traceChemin(self,i):
+    def noWay(self,sommetInit):
+        n=len(self.q)
+        sommet=copy.deepcopy(sommetInit)
+        it=0
+        culdesac=True
+        while (sommet!=n-1) and (it<n) :
+                nextsommet=np.argmax(self.q[sommet][:])
+                sommet=nextsommet
+                it=it+1
+        if (it<n):
+            culdesac=False
+        return culdesac
+
+    def traceChemin(self,sommetInit):
+            i=copy.deepcopy(sommetInit)
             n=len(self.q)
             sommet=self.q[i][:]
             chemin=[i]
@@ -108,10 +122,8 @@ class QLearning:
               self.setgamma(i*0.1)
               nbit=self.testQ()
               x.append(i*0.1)
-        if (nbit==504):
+        if (nbit==504) and (self.noWay(sommetInit)==True):
             print('Il n y a pas de résolution possible du labyrinthe en partant du sommet', sommetInit)
-            print(self.getQ())
-            print(nbit)
         else:
             print('Pour le QLearning nous obtenons la matrice solution :')
             print(self.getQ())
