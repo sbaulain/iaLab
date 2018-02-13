@@ -73,7 +73,7 @@ class QLearning:
                     break
             it=it+1
         self.conv.append(it)
-
+        return it
 
     def setQinit(self):
             self.q=np.zeros([len(self.q),len(self.q)])
@@ -105,18 +105,19 @@ class QLearning:
         for i in range (1,9):
               self.setQinit()
               self.setgamma(i*0.1)
-              self.testQ()
+              nbit=self.testQ()
               x.append(i*0.1)
         print('Pour le QLearning nous obtenons la matrice solution :')
         print(self.getQ())
         self.traceChemin(sommetInit)
+        print(nbit)
         fig = plt.figure()
         plt.plot(x,self.conv)
         fig.suptitle('Nombres d iterations jusqu a convergence en fonction des valeurs de gamma', fontsize=20)
         plt.xlabel('gamma', fontsize=18)
         plt.ylabel('Nb itérations', fontsize=16)
         fig.savefig('convergence.jpg')
-        plt.show()
+        #plt.show()
 
     def getQ(self):
             return self.q

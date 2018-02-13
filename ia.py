@@ -22,20 +22,20 @@ class Ia:
 
     def resolveIA(self,lab,sommetInit):
 
-        #print("Avec apprentissage par renforcement :")
+        print("Avec apprentissage par renforcement :")
 
-        #mon_q=QLearning(mon_lab)
-        #mon_q.testQGammas(mon_lab,sommetInit)
+        mon_q=QLearning(mon_lab)
+        mon_q.testQGammas(mon_lab,sommetInit)
 
-        print("Avec l'algorithme A star :")
+        #print("Avec l'algorithme A star :")
 
         #print("Exemple d'execution du rapport:")
         #newM= mon_a.setListNodes(mon_lab,0)
         #mon_a.a_star_search(mon_lab,sommetInit,newM)
-        
-        mon_a=AStar(mon_lab)
-        newM= mon_a.setListNodes(mon_lab,sommetInit)
-        mon_a.a_star_search(mon_lab,sommetInit,newM)
+
+        #mon_a=AStar(mon_lab)
+        #newM= mon_a.setListNodes(mon_lab,sommetInit)
+        #mon_a.a_star_search(mon_lab,sommetInit,newM)
 
 
 
@@ -48,11 +48,11 @@ if __name__ == "__main__":
     mon_lab.setCoutMatrice()
     CM=mon_lab.getCoutMatrice()
     print(CM)
-    
+
     """mon_lab.setExemple()
     exemple=mon_lab.getExemple()
     print(exemple)"""
-    
+
     sommetInit=random.randint(0,len(CM)-2)
     print('nous partirons du sommet :', sommetInit)
     mon_ia.resolveIA(mon_lab,sommetInit)
