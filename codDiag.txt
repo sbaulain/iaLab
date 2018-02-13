@@ -1,0 +1,79 @@
+@startuml
+Ia <|- Qlearn
+Ia <|- Lab
+Qlearn <|- Lab
+Astar <|- Lab
+Ia <|- Astar
+
+class Ia {
+  lab : Labyrinthe
+  getLabytinthe():Labyrinthe
+  setLabytinthe(Labyrinthe)
+  resolveIA(Labyrinthe,int)
+}
+
+
+class Lab {
+  coutMatrice : Array
+  exemple : Array
+  getCoutMatrice():Array
+  setCoutMatrice()
+  getExemple():Array
+  setExemple()
+  makeMat():Array
+  makeExemple():Array
+}
+
+
+
+class Qlearn {
+  q : Array
+  r : Array
+  conv : List
+  gamma : List
+  get_r():Array
+  set_r(Array)
+  getQ():Array
+  testQ()
+  setQinit()
+  setgamma(int)
+  traceChemin(int)
+  testQGammas(Labyrinthe,int)
+  first(int,Array,Array,int):Array,int
+  keepGoing(Array,Array):Bool
+}
+
+
+class Astar {
+  list_nodes : List
+  getCoutMatrice():Array
+  setListNodes(Labyrinthe,int)
+  a_star_search(Labyrinthe,int,Array)
+  getBestChild(List,int) 
+  print_list(List)
+  estimate(List)
+  checkFrontier(int):String
+  changeMatrice(cout)
+}
+
+
+
+class Node {
+  x : int
+  heuristic : int
+  children : List
+  estimate : int
+  costSoFar : int
+  getX():int
+  setX(int)
+  getHeuristic():int
+  setHeuristic(int)
+  getChildren():List
+  setChildren(List)
+  getEstimate():int
+  setEstimate(int)
+  getCostSoFar():int
+  setCostSoFar(int)
+  
+}
+@enduml

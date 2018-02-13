@@ -116,9 +116,7 @@ class QLearning:
         plt.xlabel('gamma', fontsize=18)
         plt.ylabel('Nb itérations', fontsize=16)
         fig.savefig('convergence.jpg')
-        #plt.show()
-
-
+        plt.show()
 
     def getQ(self):
             return self.q

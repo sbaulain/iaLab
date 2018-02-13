@@ -1,0 +1,25 @@
+@startuml
+Ia -> Lab: setLabyrinthe()
+Lab -> Lab:setcoutMatrice() 
+Lab --> Ia: 
+
+Ia -> Ia: resolveIA()
+
+Ia -> Qlearn: testQGammas()
+Qlearn -> Qlearn : set_r() 
+
+loop  fois le nombre de valeurs de gamma
+
+      Qlearn -> Qlearn : setQinit()
+      Qlearn -> Qlearn : setgamma()
+      Qlearn -> Qlearn : testQ()
+      loop tant que (KeepGoing() == True) et (nbIt<limIt)
+ 
+           loop tant que le sommet de sortie n'est pas trouvé
+                 Qlearn -> Qlearn : first()
+           end
+      end
+end
+Qlearn -> Qlearn : traceChemin()
+Qlearn --> Ia
+@enduml
