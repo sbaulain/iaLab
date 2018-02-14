@@ -1,4 +1,4 @@
-@startuml
+﻿@startuml
 Ia -> Lab: setLabyrinthe()
 Lab -> Lab:setcoutMatrice() 
 Lab --> Ia: 
@@ -22,4 +22,19 @@ loop  fois le nombre de valeurs de gamma
 end
 Qlearn -> Qlearn : traceChemin()
 Qlearn --> Ia
+
+Ia -> AStar : setListNodes()
+Ia -> AStar : a_star_search()
+
+loop TANT QUE on a pas trouvé la sortie
+
+      AStar->AStar : setEstimate()
+      loop POUR TOUT les enfants du candidat 
+              AStar->AStar : setCostSoFar()
+              AStar->AStar : setEstimate()
+      end 
+      AStar->AStar : getBestChild()
+      AStar->AStar : checkFrontier()
+end
+AStar --> Ia
 @enduml

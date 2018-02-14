@@ -24,16 +24,17 @@ class Ia:
     def resolveIA(self,lab,sommetInit):
 
         #print("Avec apprentissage par renforcement :")
-
-        
-        
+       
         mon_q=QLearning(mon_lab)
         mon_q.testQGammas(mon_lab,sommetInit)
 
         print("Avec l'algorithme A star :")
 
+        p=input("Entrez l'heuristique de votre choix :\n 1) Parfaite \n 2) Biaisée \n 3) Simple \n")
+        p = float(p)
+        
         mon_a=AStar(mon_lab)
-        newM= mon_a.setListNodes(mon_lab,sommetInit)
+        newM= mon_a.setListNodes(mon_lab,sommetInit,p)
         mon_a.a_star_search(mon_lab,sommetInit,newM)
         
         #print("Exemple d'execution du rapport:")

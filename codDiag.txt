@@ -1,9 +1,8 @@
 @startuml
-Ia <|- Qlearn
-Ia <|- Lab
-Qlearn <|- Lab
-Astar <|- Lab
-Ia <|- Astar
+Ia <-up- Lab
+Qlearn <-down- Lab
+AStar <-down- Lab
+Node -left-> AStar
 
 class Ia {
   lab : Labyrinthe
@@ -15,13 +14,9 @@ class Ia {
 
 class Lab {
   coutMatrice : Array
-  exemple : Array
   getCoutMatrice():Array
   setCoutMatrice()
-  getExemple():Array
-  setExemple()
   makeMat():Array
-  makeExemple():Array
 }
 
 
@@ -44,36 +39,13 @@ class Qlearn {
 }
 
 
-class Astar {
+class AStar {
   list_nodes : List
-  getCoutMatrice():Array
   setListNodes(Labyrinthe,int)
   a_star_search(Labyrinthe,int,Array)
+  set_heuristic_perfect(List,n)
+  set_heuristic_biaised(List,n)
+  set_heuristic_len(List,n)
   getBestChild(List,int) 
-  print_list(List)
-  estimate(List)
   checkFrontier(int):String
-  changeMatrice(cout)
 }
-
-
-
-class Node {
-  x : int
-  heuristic : int
-  children : List
-  estimate : int
-  costSoFar : int
-  getX():int
-  setX(int)
-  getHeuristic():int
-  setHeuristic(int)
-  getChildren():List
-  setChildren(List)
-  getEstimate():int
-  setEstimate(int)
-  getCostSoFar():int
-  setCostSoFar(int)
-  
-}
-@enduml
