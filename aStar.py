@@ -131,19 +131,19 @@ class AStar:
                     candidate=frontier[-1]
                 else :
                     #lorsqu'on est tombe sur une boucle infini
-                    print("Labyrinthe impossible a resoudre en partant de ",sommetInit)
+                    print("Labyrinthe impossible à résoudre en partant de ",sommetInit)
                     break
             #on regarde si il y a mieux dans la frontiere
             temp=checkFrontier(candidate,frontier)
             if temp!=candidate:
-                print("On a verifier la frontiere et le candidat est passe de",temp.getX(),"à",candidate.getX())
-                candidate=tem
+                print("On a verifié la frontière et le candidat est passé de",candidate.getX(),"à",temp.getX())
+                candidate=temp
             closedlist.append(candidate)
             frontier.remove(candidate)
             start = candidate
             it=it+1
 
-        print("Le chemin parcouru par A*est :")    
+        print("Le chemin parcouru par A* est :")    
         print_list(closedlist)
 
     #methode pour trouver l'enfant avec l'estimation la plus faible
