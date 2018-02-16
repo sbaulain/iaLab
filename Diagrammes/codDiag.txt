@@ -49,3 +49,36 @@ class AStar {
   getBestChild(List,int) 
   checkFrontier(int):String
 }
+
+class Node {
+  
+  x : int
+  heuristic : int
+  
+  children : List
+  
+  estimate : int
+  
+  costSoFar : int
+  
+  getX():int
+  
+  setX(int)
+  
+  getHeuristic():int
+  
+  setHeuristic(int)
+  
+  getChildren():List
+  
+  setChildren(List)
+  
+  getEstimate():int
+  
+  setEstimate(int)
+  
+  getCostSoFar():int
+  
+  setCostSoFar(int)
+  
+}
